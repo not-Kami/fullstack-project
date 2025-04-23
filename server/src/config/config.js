@@ -1,8 +1,11 @@
 import dotenv from 'dotenv';
 import express from 'express';
 
+
 dotenv.config();
 const app = express();
+
+
 
 let environment = process.env.NODE_ENV;
 let port = process.env.PORT;
@@ -23,4 +26,4 @@ if (environment !== 'development') {
     config.compression = 'enable';
 };
 
-export {config, app};
+export {app, config};
