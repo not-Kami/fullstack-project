@@ -1,0 +1,44 @@
+/* src/ui/layout/Layout.css */
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font: var(--mui-font-body1);
+  }
+  
+  div#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    font: var(--mui-font-body1);
+  }
+  
+  header, main, footer {
+    padding: var(--mui-spacing-2);
+  }
+  
+  header {
+    display: flex;
+    justify-content: center;
+  
+    .MuiToolbar-root {
+      justify-content: center;
+    }
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  footer {
+    display: flex; 
+    justify-content: center;
+  }

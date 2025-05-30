@@ -1,24 +1,20 @@
-
 import express from 'express';
-import {getUsers,
-    getUserById,
-    createUser,
-    updateUser,
-    deleteUser
-} from './user.controller.js'
+import { findAll, findOne, update, remove } from './user.controller.js';
+import { authenticate, hasRole } from '../../api/auth/auth.middleware.js';
+import { upload } from '../../config/multer.config.js';
+import { validateUser } from './user.validation.js';
 
+const userRouter = express.Router();
 
-const router = express.Router();
+userRouter.route('/')
+  .get(authenticate, hasRole(['admin']), findAll);
 
-// - GET /api/contacts - Liste tous les contacts
-router.get('/api/user', getUsers)
-// - GET /api/contacts/:id - Récupère un contact spécifique
-router.get('/api/user/:id', getUserById)
-// - POST /api/contacts - Crée un nouveau contact AVEC UPLOAD DE FICHIER
-router.post('/api/user',createUser)
-// - PUT /api/contacts/:id - Met à jour un contact AVEC UPLOAD DE FICHIER
-router.put('/api/user/:id',updateUser)
-// - DELETE /api/contacts/:id - Supprime un contact
-router.delete('/api/user/:id', deleteUser)
+userRouter.route('/:id')
+  .get(authenticate, findOne)
+  .put(authenticate, upload.single('avatar'), validateUser, update)
+  .delete(authenticate, remove);
 
-export default router;
+userRouter.route('/:id/avatar')
+  .post(authenticate, upload.single('avatar'), update);
+
+export default userRouter; 

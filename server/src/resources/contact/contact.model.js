@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const clientSchema = mongoose.Schema({
+const contactSchema = mongoose.Schema({
     lastname: {
         type: String,
         required: true
@@ -12,7 +12,16 @@ const clientSchema = mongoose.Schema({
     email: {
         type: String,
         required: true
+    },
+    avatar: {
+        type: String,
+        default: null
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
-})
+});
 
-  export const Contact= mongoose.model('Contact', contactSchema);
+export const Contact = mongoose.model('Contact', contactSchema);
